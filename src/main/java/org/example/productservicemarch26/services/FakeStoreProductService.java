@@ -17,6 +17,7 @@ public class FakeStoreProductService implements ProductService {
         this.restTemplate = restTemplate;
     }
 
+
     public Product getProductById(long id) throws ProductNotFoundException{
       ResponseEntity<FakeStoreProductDto>responseEntity=
               restTemplate.getForEntity(
@@ -41,6 +42,12 @@ public class FakeStoreProductService implements ProductService {
              products.add(Product.from(fakeStoreProductDto));
          }
         return products;
+    }
+    public List<Product>searchProducts(String keyword){
+        if(keyword==null||keyword.isEmpty()){
+            return getAllProducts();
+        }
+        return null;
     }
 
     @Override
